@@ -1,15 +1,10 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:feministconfessions/widgets/confession_list_view.dart';
 import 'package:flutter/material.dart';
 
 class ConfessionsScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    // TODO: fetch confessions from firebase
-    List<ConfessionListView> confessions = [];
-    for (var i = 0; i < 15; i++) {
-      confessions.add(ConfessionListView("i'm a feminist but..."));
-    }
-
     return Scaffold(
       appBar: AppBar(
         title: Text(
@@ -17,9 +12,7 @@ class ConfessionsScreen extends StatelessWidget {
           style: Theme.of(context).textTheme.headline1,
         ),
       ),
-      body: ListView(
-        children: confessions,
-      ),
+      body: _buildBody(context),
       floatingActionButton: FloatingActionButton(
         child: Icon(Icons.gavel),
         onPressed: () {
@@ -29,7 +22,8 @@ class ConfessionsScreen extends StatelessWidget {
               // TODO: extract this widget to it's own file
               // TODO: https://flutter.dev/docs/cookbook/forms/retrieve-input
               return Container(
-                padding: EdgeInsets.only(bottom: MediaQuery.of(context).viewInsets.bottom),
+                padding: EdgeInsets.only(
+                    bottom: MediaQuery.of(context).viewInsets.bottom),
                 child: TextField(
                   autofocus: true,
                   decoration: InputDecoration(
@@ -44,4 +38,25 @@ class ConfessionsScreen extends StatelessWidget {
       ),
     );
   }
+}
+
+Widget _buildBody(BuildContext context) {
+  return StreamBuilder<QuerySnapshot>(
+      stream: Firestore.instance.collection("temp_setup").snapshots(),
+      builder: (context, snapshot) {
+        if (!snapshot.hasData) return LinearProgressIndicator();
+
+        return _buildList(context, snapshot.data.documents);
+      });
+}
+
+Widget _buildList(BuildContext context, List<DocumentSnapshot> snapshot) {
+  return ListView(
+    padding: const EdgeInsets.only(top: 20.0),
+    children: snapshot.map((data) => _buildListItem(context, data)).toList(),
+  );
+}
+
+Widget _buildListItem(BuildContext context, DocumentSnapshot snapshot) {
+  return ConfessionListView.fromSnapshot(snapshot);
 }

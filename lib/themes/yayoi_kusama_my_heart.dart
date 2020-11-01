@@ -4,25 +4,33 @@ ThemeData MyTheme = ThemeData(
   visualDensity: VisualDensity.adaptivePlatformDensity,
   backgroundColor: Color(0xFFF5F5F3),
   primaryColor: Color(0xFFEC7201),
-  accentColor: Color(0xFF00A759),
+  accentColor: Color(0xFFDB465A),
+  fontFamily: 'OpenSans',
   textTheme: TextTheme(
       headline1: TextStyle(
+        fontFamily: 'Montserrat',
         color: Color(0xFFF5F5F3),
-        fontSize: 30,
-        fontWeight: FontWeight.w600,
+        fontSize: 25,
       ),
       headline2: TextStyle(
-        color: Color(0xFF167AB8),
+        fontFamily: 'Ruluko',
+        color: Color(0xFFEC7201),
+        fontSize: 20,
+        fontWeight: FontWeight.w600
       ),
       bodyText1: TextStyle(
         color: Color(0xFF58474B),
-        fontSize: 20,
+        fontSize: 15,
+      ),
+      bodyText2: TextStyle(
+        color: Color(0xFFF5F5F3),
+        fontSize: 15,
       )
   ),
 );
 
 // helpful reference since colours are shown in Android Studio
-List<Color> AllColours = [
+const List<Color> AllColours = [
   Color(0xFFBB3A46),
   Color(0xFFA93236),
   Color(0xFFDB465A),

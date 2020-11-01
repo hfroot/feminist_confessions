@@ -1,3 +1,4 @@
+import 'package:feministconfessions/screens/new_confession_screen.dart';
 import 'package:feministconfessions/themes/yayoi_kusama_my_heart.dart';
 import 'package:feministconfessions/screens/confessions_screen.dart';
 import 'package:flutter/material.dart';
@@ -13,9 +14,11 @@ class FeministConfessionsApp extends StatelessWidget {
     return MaterialApp(
       title: 'feminist confessions',
       theme: MyTheme,
-      home: SafeArea(
-        child: ConfessionsScreen(),
-      ),
+      initialRoute: ConfessionsScreen.id,
+      routes: {
+        ConfessionsScreen.id: (context) => ConfessionsScreen(),
+        NewConfessionScreen.id: (context) => NewConfessionScreen(),
+      },
     );
   }
 }

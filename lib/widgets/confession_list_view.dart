@@ -1,3 +1,4 @@
+import 'package:feministconfessions/themes/icons.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:feministconfessions/themes/yayoi_kusama_my_heart.dart';
 import 'dart:math';
@@ -21,9 +22,9 @@ class ConfessionListView extends StatelessWidget {
   Widget build(BuildContext context) {
     return ListTile(
       leading: Icon(
-        Icons.bubble_chart,
+        AppIcons['smileWink'],
         color: AllColours[random.nextInt(AllColours.length)],
-        size: 40,
+        size: 35,
       ),
       title: Text(
         this.text,
